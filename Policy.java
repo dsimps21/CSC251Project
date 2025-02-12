@@ -174,7 +174,7 @@ public class Policy
    */
    public double getHolderBMI()
    {
-      return (holderWeight * 703) / (holderHeight);
+      return (holderWeight * 703) / (Math.pow(holderHeight,2));
    }
    
    /**   Accessor (getter) method to calculate and return the insurance policy costs
