@@ -7,8 +7,8 @@ public class Project_daniel_simpson
    public static void main(String[] args)
    {
       //Set variables to collect data
-      int policyNumber, age;
-      String providerName, firstName, lastName, smokingStatus;
+      int age;
+      String policyNumber, providerName, firstName, lastName, smokingStatus;
       double height, weight;
       
       //Create variable for Scanner class to collect inputs
@@ -16,8 +16,7 @@ public class Project_daniel_simpson
       
       //Ask user for inputs
       System.out.print("Please enter the Policy Number: ");
-      policyNumber = keyboard.nextInt();
-      keyboard.nextLine();               //Clear keyboards empty line
+      policyNumber = keyboard.nextLine();
       
       System.out.print("Please enter the Provider Name: ");
       providerName = keyboard.nextLine();
@@ -30,7 +29,7 @@ public class Project_daniel_simpson
       
       System.out.print("Please enter the Policyholder's Age: ");
       age = keyboard.nextInt();
-      keyboard.nextLine();
+      keyboard.nextLine();             //Clears empty space in Scanner log
       
       System.out.print("Please enter the Policyholder's Smoking Status (smoker/non-smoker): ");
       smokingStatus = keyboard.nextLine();

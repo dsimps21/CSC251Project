@@ -3,7 +3,7 @@
 public class Policy
 {
    
-   private int policyNumber;
+   private String policyNumber;
    private String providerName;
    private String holderFirstName;
    private String holderLastName;
@@ -17,7 +17,7 @@ public class Policy
    */ 
    public Policy()
    {
-      policyNumber = 0;
+      policyNumber = "";
       providerName = "";
       holderFirstName = "";
       holderLastName = "";
@@ -37,7 +37,7 @@ public class Policy
       @param   height      The height of the policy holder
       @param   weight      The weight of the policy holder
    */
-   public Policy(int acct, String provider, String first, String last, int age,
+   public Policy(String acct, String provider, String first, String last, int age,
                      String smoke, double height, double weight)
    {
       policyNumber = acct;
@@ -53,7 +53,7 @@ public class Policy
    /**   Mutator (setter) method to set policy number
             @param   acct        The insurance policy number of the policy holder
    */
-   public void setPolicyNumber(int acct)
+   public void setPolicyNumber(String acct)
    {
       policyNumber = acct;
    }  
@@ -116,7 +116,7 @@ public class Policy
    
    /**   Accessor (getter) method to get policy holder's policy number
    */
-   public int getPolicyNumber()
+   public String getPolicyNumber()
    {
       return policyNumber;
    }
@@ -174,23 +174,32 @@ public class Policy
    */
    public double getHolderBMI()
    {
-      return (holderWeight * 703) / (Math.pow(holderHeight,2));
+      final double CONV_FACTOR = 703;              //Conversion factor for BMI calculation
+      //BMI calculation = (Weight * CONV_FACTOR) / (Height * Height)
+      return (holderWeight * CONV_FACTOR) / (Math.pow(holderHeight,2));
    }
    
    /**   Accessor (getter) method to calculate and return the insurance policy costs
    */
    public double getPolicyCost()
    {
-      final double BASE_FEE = 600.0;
-      double policyCost = BASE_FEE;
-      double BMI = getHolderBMI();
+      final double BASE_FEE = 600.0;               //Base rate of policy
+      final double ADDL_FEE_AGE = 75.0;            //Additional fee if age over AGE_THRESHOLD
+      final double ADDL_FEE_SMOKING = 100.0;       //Additional fee if smoker
+      final double ADDL_FEE_PER_BMI = 20;          //Addtional fee if BMI over BMI_THRESHOLD
       
-      if(holderAge > 50)
-         policyCost += 75.0;
+      final int AGE_THRESHOLD = 50;                //Age which additional fee imposed
+      final int BMI_THRESHOLD = 35;                //BMI which additional fee imposed
+      
+      double policyCost = BASE_FEE;                //Total variable set to base rate
+      double BMI = getHolderBMI();                 //BMI variable to retrieve BMI calculation
+      
+      if(holderAge > AGE_THRESHOLD)
+         policyCost += ADDL_FEE_AGE;
       if(holderSmokingStatus.equalsIgnoreCase("smoker"))
-         policyCost += 100.0;
-      if(BMI > 35.0)
-         policyCost += ((BMI - 35.0)*20.0);
+         policyCost += ADDL_FEE_SMOKING;
+      if(BMI > BMI_THRESHOLD)
+         policyCost += ((BMI - BMI_THRESHOLD)*ADDL_FEE_PER_BMI);
       
       return policyCost; 
    }
