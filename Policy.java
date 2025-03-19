@@ -2,7 +2,7 @@
 */
 public class Policy
 {
-   
+   /**   Fields for class use    */
    private String policyNumber;
    private String providerName;
    private String holderFirstName;
@@ -11,6 +11,7 @@ public class Policy
    private String holderSmokingStatus;
    private double holderHeight;
    private double holderWeight;
+   
    
    /**  No-arg constructor that initializes all fields.
             Defaults all fields to 0 or blank as necessary, based on data type.
