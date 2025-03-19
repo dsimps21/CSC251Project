@@ -28,14 +28,14 @@ public class Policy
    }
    
    /**   Constructor that accepts arguments
-      @param   acct        The insurance policy number for the policy holder
-      @param   provider    The name of the provider of the insurance policy
-      @param   first       The first name of the policy holder
-      @param   last        The last name of the policy holder
-      @param   age         The age of the policy holder
-      @param   smoke       The smoking status of the policy holder ("smoker" or "non-smoker")
-      @param   height      The height of the policy holder
-      @param   weight      The weight of the policy holder
+            @param   acct        The insurance policy number for the policy holder
+            @param   provider    The name of the provider of the insurance policy
+            @param   first       The first name of the policy holder
+            @param   last        The last name of the policy holder
+            @param   age         The age of the policy holder
+            @param   smoke       The smoking status of the policy holder ("smoker" or "non-smoker")
+            @param   height      The height of the policy holder
+            @param   weight      The weight of the policy holder
    */
    public Policy(String acct, String provider, String first, String last, int age,
                      String smoke, double height, double weight)
@@ -49,6 +49,8 @@ public class Policy
       holderHeight = height;
       holderWeight = weight;
    }
+   
+   /**   *****    Mutator (setter) methods    *****   */
    
    /**   Mutator (setter) method to set policy number
             @param   acct        The insurance policy number of the policy holder
@@ -114,7 +116,11 @@ public class Policy
       holderWeight = weight;
    }
    
+   
+   /**   *****    Accessor (getter) methods     *****       */
+   
    /**   Accessor (getter) method to get policy holder's policy number
+            @return  The policy holder's insurance policy number
    */
    public String getPolicyNumber()
    {
@@ -122,6 +128,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get insurance provider's name
+            @return  The policy holder's insurance provider name
    */
    public String getProviderName()
    {
@@ -129,6 +136,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's first name
+            @return  The policy holder's first name
    */
    public String getHolderFirstName()
    {
@@ -136,6 +144,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's last name
+            @return  The policy holder's last name
    */
    public String getHolderLastName()
    {
@@ -143,6 +152,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's age
+            @return  The policy holder's age
    */
    public int getHolderAge()
    {
@@ -150,6 +160,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's smoking status
+            @return  The policy holder's smoking status
    */
    public String getHolderSmokingStatus()
    {
@@ -157,6 +168,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's height
+            @return  The policy holder's height
    */
    public double getHolderHeight()
    {
@@ -164,6 +176,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to get policy holder's weight
+            @return  The policy holder's weight
    */
    public double getHolderWeight()
    {
@@ -171,6 +184,7 @@ public class Policy
    }
    
    /**   Acccessor (getter) method to calculate and return the BMI of the policy holder
+            @return  The policy holder's calculated BMI
    */
    public double getHolderBMI()
    {
@@ -180,6 +194,7 @@ public class Policy
    }
    
    /**   Accessor (getter) method to calculate and return the insurance policy costs
+            @return  The policy holder's calculated insurance policy cost
    */
    public double getPolicyCost()
    {
