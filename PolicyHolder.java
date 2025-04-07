@@ -156,5 +156,20 @@ public class PolicyHolder
    }
 
 
+   /**   Accessor method toString for display of policyholder information
+      @return - A string containing the policyholder information
+   */
+   public String toString()
+   {
+      return String.format("Policyholder's First Name: %s\n", holderFirstName +
+                           "Policyholder's Last Name: %s\n", holderLastName +
+                           "Policyholder's Age: %d\n",holderAge +
+                           "Policyholder's Smoking Status (Y/N): %s\n", holderSmokingStatus +
+                           "Policyholder's Height: %.1f inches", holderHeight +
+                           "Policyholder's Weight: %.1f pounds", holderWeight +
+                           "Policyholder's BMI: %.2f", getHolderBMI());
+   
+   }
+
 
 }
