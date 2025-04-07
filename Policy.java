@@ -93,4 +93,16 @@ public class Policy
       return policyCost; 
    }
    
+   
+   /**   Accessor method toString for display of policy information
+      @return - A string containing the policy information
+   */
+   public String toString()
+   {
+      return String.format("Policy Number: %s\n", policyNumber +
+                           "Provider Name: %s\n", providerName +
+                           PolicyHolder.toString() +
+                           "Policy Price: %.2f\n", getPolicyCost());
+   }
+   
 }
