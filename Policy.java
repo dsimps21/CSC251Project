@@ -5,6 +5,7 @@ public class Policy
    /**   Fields for class use    */
    private String policyNumber;
    private String providerName;
+   private PolicyHolder policyHolder;        //Instance of the PolicyHolder class
    private static int policyCount = 0;
    
    
@@ -15,6 +16,7 @@ public class Policy
    {
       policyNumber = "";
       providerName = "";
+      policyHolder = new PolicyHolder();
       policyCount++;
       
    }
@@ -22,11 +24,13 @@ public class Policy
    /**   Constructor that accepts arguments
             @param   acct        The insurance policy number for the policy holder
             @param   provider    The name of the provider of the insurance policy
+            @param   insured     A PolicyHolder object for the insured holder
    */
-   public Policy(String acct, String provider)
+   public Policy(String acct, String provider, PolicyHolder insured)
    {
       policyNumber = acct;
       providerName = provider;
+      policyHolder = new PolicyHolder(insured);
       policyCount++;
    }
    
@@ -48,6 +52,14 @@ public class Policy
       providerName = provider;
    }
    
+   /**   Mutator (setter) method to set PolicyHolder object
+            @param   insured     PolicyHolder object for the insured holder
+   */
+   public void setPolicyHolder(PolicyHolder insured)
+   {
+      policyHolder = new PolicyHolder(insured);
+   }
+   
    
    
    /**   *****    Accessor (getter) methods     *****       */
@@ -66,6 +78,14 @@ public class Policy
    public String getProviderName()
    {
       return providerName;
+   }
+   
+   /**   Accessor (getter) method to return reference to copy of PolicyHolder object
+            @return  Reference to copy of this policy's PolicyHolder object
+   */
+   public PolicyHolder getPolicyHolder()
+   {
+      return new PolicyHolder(policyHolder);
    }
    
    
@@ -93,11 +113,11 @@ public class Policy
       final int BMI_THRESHOLD = 35;                //BMI which additional fee imposed
       
       double policyCost = BASE_FEE;                //Total variable set to base rate
-      double BMI = getHolderBMI();                 //BMI variable to retrieve BMI calculation
+      double BMI = policyHolder.getHolderBMI();    //BMI variable to retrieve BMI calculation
       
-      if(holderAge > AGE_THRESHOLD)
+      if(policyHolder.getHolderAge() > AGE_THRESHOLD)
          policyCost += ADDL_FEE_AGE;
-      if(holderSmokingStatus.equalsIgnoreCase("smoker"))
+      if(policyHolder.getHolderSmokingStatus().equalsIgnoreCase("smoker"))
          policyCost += ADDL_FEE_SMOKING;
       if(BMI > BMI_THRESHOLD)
          policyCost += ((BMI - BMI_THRESHOLD)*ADDL_FEE_PER_BMI);
@@ -111,10 +131,10 @@ public class Policy
    */
    public String toString()
    {
-      return String.format("Policy Number: %s\n", policyNumber +
-                           "Provider Name: %s\n", providerName +
-                           PolicyHolder.toString() +
-                           "Policy Price: %.2f\n", getPolicyCost());
+      return String.format("Policy Number: %s\n" +  
+                           "Provider Name: %s\n" +  
+                           policyHolder.toString() +
+                           "Policy Price: $%.2f\n", policyNumber, providerName, getPolicyCost());
    }
    
 }
