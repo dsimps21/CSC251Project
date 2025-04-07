@@ -5,6 +5,7 @@ public class Policy
    /**   Fields for class use    */
    private String policyNumber;
    private String providerName;
+   private static int policyCount = 0;
    
    
    /**  No-arg constructor that initializes all fields.
@@ -14,6 +15,7 @@ public class Policy
    {
       policyNumber = "";
       providerName = "";
+      policyCount++;
       
    }
    
@@ -25,6 +27,7 @@ public class Policy
    {
       policyNumber = acct;
       providerName = provider;
+      policyCount++;
    }
    
    /**   *****    Mutator (setter) methods    *****   */
@@ -65,6 +68,15 @@ public class Policy
       return providerName;
    }
    
+   
+   
+   /**   Accessor (getter) method to return number of policies created
+            @return  Number of policies objects created
+   */
+   public int getPolicyCount()
+   {
+      return policyCount;
+   }
    
    
    /**   Accessor (getter) method to calculate and return the insurance policy costs
