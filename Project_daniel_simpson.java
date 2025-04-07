@@ -6,106 +6,90 @@ import java.io.*;                   //imports the IO class to work with file dat
 */
 public class Project_daniel_simpson
 {
-   public static void main(String[] args)
+   public static void main(String[] args) throws IOException
    {
       //Set variables to collect data
-      int age, smoker = 0, nonSmoker = 0;
+      int age, numSmokers = 0, countPolicies=0;
       String policyNumber, providerName, firstName, lastName, smokingStatus;
       double height, weight;
       
       //Constant for file name
       final String fileName = "PolicyInformation.txt";
+         
+      //Create File class object to obtain data
+      File readFile = new File(fileName);
       
-      //Use try method to open file and process data
-      try
-      {   
-         //Create File class object to obtain data
-         File readFile = new File(fileName);
+      //Create Scanner class object to collect data from file
+      Scanner inputFile = new Scanner(readFile);
+      
+      //Create ArrayList class object to store policy information from Policy class
+      ArrayList<Policy> policyArray = new ArrayList<Policy>();
+      
+      //Read file data using while loop. hasNext method will ensure data collected until end of file
+      while(inputFile.hasNext())
+      {
+         policyNumber = inputFile.nextLine();
+         providerName = inputFile.nextLine();
+         firstName = inputFile.nextLine();
+         lastName = inputFile.nextLine();
+         age = inputFile.nextInt();
          
-         //Create Scanner class object to collect data from file
-         Scanner inputFile = new Scanner(readFile);
+         //Clear empty space in Scanner log
+         inputFile.nextLine();
          
-         //Create ArrayList class object to store policy information from Policy class
-         ArrayList<Policy> policyArray = new ArrayList<>();
+         smokingStatus = inputFile.nextLine();
+         height = inputFile.nextDouble();
+         weight = inputFile.nextDouble();
          
-         //Read file data using while loop. hasNext method will ensure data collected until end of file
-         while(inputFile.hasNext())
+         /* Skip any empty cells and clear empty space in Scanner log. 
+               Perform only if data still remains in file.
+         */
+         if(inputFile.hasNext())
          {
-            policyNumber = inputFile.nextLine();
-            providerName = inputFile.nextLine();
-            firstName = inputFile.nextLine();
-            lastName = inputFile.nextLine();
-            age = inputFile.nextInt();
-            
-            //Clear empty space in Scanner log
             inputFile.nextLine();
-            
-            smokingStatus = inputFile.nextLine();
-            height = inputFile.nextDouble();
-            weight = inputFile.nextDouble();
-            
-            /* Skip any empty cells and clear empty space in Scanner log. 
-                  Perform only if data still remains in file.
-            */
-            if(inputFile.hasNext())
-            {
-               inputFile.nextLine();
-               inputFile.nextLine();
-            } 
+            inputFile.nextLine();
+         } 
          
-            //Create instance of Policy class using constructor with arguments
-            Policy userPolicy = new Policy(policyNumber, providerName, firstName, lastName, age, 
-                                          smokingStatus, height, weight);
-            
-            //Add Policy class information to ArrayList
-            policyArray.add(userPolicy);
-         } //End of while loop
+         //Create instance of PolicyHolder class using constructor with arguments
+         PolicyHolder holder = new PolicyHolder(firstName, lastName, age, 
+                                       smokingStatus, height, weight); 
+      
+         //Create instance of Policy class using constructor with arguments and PolicyHolder object
+         Policy userPolicy = new Policy(policyNumber, providerName, holder);
          
-         //Close the file
-         inputFile.close();
+         //Add Policy class information to ArrayList
+         policyArray.add(userPolicy);
          
-         //Use for loop to display contents of ArrayList for policy holders
-         for(int i = 0; i < policyArray.size(); i++)
-         {
-            //Display policy holder information
-            System.out.printf("\nPolicy Number: %s\n", policyArray.get(i).getPolicyNumber());
-            System.out.printf("Provider Name: %s\n", policyArray.get(i).getProviderName());
-            System.out.printf("Policyholder's First Name: %s\n", policyArray.get(i).getHolderFirstName());
-            System.out.printf("Policyholder's Last Name: %s\n", policyArray.get(i).getHolderLastName());
-            System.out.printf("Policyholder's Age: %d\n", policyArray.get(i).getHolderAge());
-            
-            //Create variable to hold smoker status and gather data from array
-            String smokerStat = policyArray.get(i).getHolderSmokingStatus();
-            
-            //Continue display of policy holder information
-            System.out.printf("Policyholder's Smoking Status (smoker/non-smoker): %s\n", smokerStat);
-            System.out.printf("Policyholder's Height: %.1f inches\n", policyArray.get(i).getHolderHeight());
-            System.out.printf("Policyholder's Weight: %.1f pounds\n", policyArray.get(i).getHolderWeight());
-            System.out.printf("Policyholder's BMI: %.2f\n", policyArray.get(i).getHolderBMI());
-            System.out.printf("Policy Price: $%.2f\n", policyArray.get(i).getPolicyCost());
-            
-            //Empty space between policy information and totals
-            System.out.println();
-            
-            //Setup accumulator for smoker & non-smoker policies
-            if(smokerStat.equalsIgnoreCase("smoker"))
-               smoker ++;
-            else
-               nonSmoker ++;
+         countPolicies = userPolicy.getPolicyCount();
+      } //End of while loop
+      
+      //Close the file
+      inputFile.close();
+      
+      //Use for loop to display contents of ArrayList for policy holders
+      for(int i = 0; i < policyArray.size(); i++)
+      {
+         //Display policy holder information
+         System.out.println(policyArray.get(i));
+         
+         
+         //Empty space between policy information and totals
+         System.out.println();
+         
+         //Setup accumulator for smoker & non-smoker policies
+         if(policyArray.get(i).getPolicyHolder().getHolderSmokingStatus().equalsIgnoreCase("smoker"))
+            numSmokers++;
 
-         }
-         
-         //Display number of policies for smokers and non-smokers
-         System.out.println("The number of policies with a smoker is: " + smoker);
-         System.out.println("The number of policies with a non-smoker is: " + nonSmoker);
+      }
+      
+      //Display number of policies total, number of smokers, and number of non-smokers
+      System.out.printf("There were %d Policy objects created.\n", countPolicies); 
+      System.out.println("The number of policies with a smoker is: " + numSmokers);
+      System.out.println("The number of policies with a non-smoker is: " + 
+                           (policyArray.size() - numSmokers));
                   
          
-      }//Close try method
       
-      catch(IOException ex)
-      {
-         //Display error message for IOException
-         System.out.println("Something went wrong reading the file: " + ex.getMessage());
-      }
+
    }
 }
