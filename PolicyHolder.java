@@ -39,6 +39,19 @@ public class PolicyHolder
       holderWeight = weight;
    
    }
+   
+   /**   Copy constructor creates copy of PolicyHolder class passed as parameter
+            @param   object2     The object to copy
+   */
+   public PolicyHolder(PolicyHolder object2)
+   {
+      holderFirstName = object2.holderFirstName;
+      holderLastName = object2.holderLastName;
+      holderAge = object2.holderAge;
+      holderSmokingStatus = object2.holderSmokingStatus;
+      holderHeight = object2.holderHeight;
+      holderWeight = object2.holderWeight;
+   }
 
 
 
@@ -161,13 +174,14 @@ public class PolicyHolder
    */
    public String toString()
    {
-      return String.format("Policyholder's First Name: %s\n", holderFirstName +
-                           "Policyholder's Last Name: %s\n", holderLastName +
-                           "Policyholder's Age: %d\n",holderAge +
-                           "Policyholder's Smoking Status (Y/N): %s\n", holderSmokingStatus +
-                           "Policyholder's Height: %.1f inches", holderHeight +
-                           "Policyholder's Weight: %.1f pounds", holderWeight +
-                           "Policyholder's BMI: %.2f", getHolderBMI());
+      return String.format("Policyholder's First Name: %s\n" +
+                           "Policyholder's Last Name: %s\n"  +
+                           "Policyholder's Age: %d\n" +
+                           "Policyholder's Smoking Status (Y/N): %s\n"  +
+                           "Policyholder's Height: %.1f inches\n"  +
+                           "Policyholder's Weight: %.1f pounds\n"  +
+                           "Policyholder's BMI: %.2f\n", holderFirstName, holderLastName, holderAge, 
+                           holderSmokingStatus, holderHeight, holderWeight, getHolderBMI());
    
    }
 
